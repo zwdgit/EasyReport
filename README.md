@@ -96,7 +96,7 @@ npm run dev
 
 点击报表预览，可以查看新增报表功能是否正常
 
-![报表预览](./docs\assets\imgs\image-20211201105823923.png)
+![报表预览](./docs/assets/imgs/image-20211201105823923.png)
 
 ![报表预览](./docs/assets/imgs/image-20211201110148333.png)
 
