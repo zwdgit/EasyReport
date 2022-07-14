@@ -18,6 +18,7 @@
       :vertical-compact="true"
       :use-css-transforms="true"
       @layout-updated="layoutUpdatedEvent"
+      :class="customLayout ? 'm-grid-layout' : ''"
     >
       <el-form
         ref="queryForm"
@@ -269,6 +270,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.m-grid-layout {
+  .vue-grid-layout {
+    background: #eee;
+  }
+  .vue-grid-item:not(.vue-grid-placeholder) {
+    background: #eee;
+    border: 1px solid #999;
+  }
+}
 
 </style>
