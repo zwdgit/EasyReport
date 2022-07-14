@@ -1,18 +1,22 @@
 package com.sdyx.report.controller;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.sdyx.common.core.controller.BaseController;
 import com.sdyx.common.core.domain.AjaxResult;
 import com.sdyx.common.core.page.TableDataInfo;
-import com.sdyx.report.domain.bo.ParseSqlBo;
+import com.sdyx.report.domain.Layout;
 import com.sdyx.report.domain.ReportSql;
+import com.sdyx.report.domain.bo.ParseSqlBo;
 import com.sdyx.report.domain.bo.ReportSqlBo;
-import com.sdyx.report.service.IReportSqlColumnService;
+import com.sdyx.report.domain.bo.ReportSqlInfo;
 import com.sdyx.report.service.IReportSqlService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Validated
@@ -76,9 +80,33 @@ public class ReportSqlController extends BaseController {
         return AjaxResult.success(reportSqlService.parseSQLText(parseSqlBo));
     }
 
-    @GetMapping("/getReportSqlColumn")
-    public AjaxResult getReportSqlColumn(@RequestParam Long id) {
-        return AjaxResult.success(reportSqlService.getReportSqlColumn(id));
+    /**
+     * 获取报表信息(主要包括列信息和布局配置)
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/getReportSqlInfo")
+    public AjaxResult getReportSqlInfo(@RequestParam Long id) {
+        ReportSqlInfo reportSqlInfo = new ReportSqlInfo();
+        ReportSql reportSql = reportSqlService.getById(id);
+        Assert.notNull(reportSql, "获取Sql信息异常");
+        reportSqlInfo.setReportSqlColumns(reportSqlService.getReportSqlColumn(id));
+        reportSqlInfo.setLayout(reportSql.getLayout());
+        return AjaxResult.success(reportSqlInfo);
     }
 
+    /**
+     * 保存自定义布局
+     *
+     * @return
+     */
+    @PostMapping("/updateLayout/{reportId}")
+    public AjaxResult updateLayout(@NotNull @PathVariable Long reportId,
+                                   @RequestBody List<Layout> updateLayout) {
+        Assert.isTrue(CollectionUtil.isNotEmpty(updateLayout), "更新布局参数缺失");
+        ReportSql updateReportSql = ReportSql.builder().id(reportId).layout(updateLayout).build();
+        reportSqlService.updateById(updateReportSql);
+        return AjaxResult.success();
+    }
 }

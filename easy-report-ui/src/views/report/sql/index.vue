@@ -284,7 +284,7 @@ import { listDatabaseOptions } from '@/api/report/database'
 import {
   addReportSql,
   delReportSql,
-  getReportSqlColumn,
+  getReportSqlInfo,
   listReportSql,
   parseSQLText,
   updateReportSql
@@ -443,8 +443,8 @@ export default {
       this.open = true
       this.form = row
       this.sqlColumnTableLoading = true
-      getReportSqlColumn({ id: row.id }).then(ret => {
-        this.reportSqlColumn = ret.data
+      getReportSqlInfo({ id: row.id }).then(ret => {
+        this.reportSqlColumn = ret.data.reportSqlColumns
       }).finally(() => {
         this.sqlColumnTableLoading = false
       })

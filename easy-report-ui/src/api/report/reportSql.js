@@ -45,10 +45,19 @@ export function delReportSql(id) {
 }
 
 // 获取sql字段
-export function getReportSqlColumn(query) {
+export function getReportSqlInfo(query) {
   return request({
-    url: '/report/sql/getReportSqlColumn',
+    url: '/report/sql/getReportSqlInfo',
     method: 'get',
     params: query
+  })
+}
+
+// 解析sql字段
+export function updateLayout(reportId, layout) {
+  return request({
+    url: '/report/sql/updateLayout/' + reportId,
+    method: 'post',
+    data: layout
   })
 }

@@ -1,5 +1,6 @@
 package com.sdyx.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.sdyx.common.annotation.DataScope;
 import com.sdyx.common.constant.UserConstants;
 import com.sdyx.common.core.domain.entity.SysRole;
@@ -451,7 +452,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName) {
-        if (StringUtils.isNull(userList) || userList.size() == 0) {
+        if (CollectionUtil.isEmpty(userList)) {
             throw new ServiceException("导入用户数据不能为空！");
         }
         int successNum = 0;

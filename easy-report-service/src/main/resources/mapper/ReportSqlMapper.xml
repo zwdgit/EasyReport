@@ -3,5 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sdyx.report.mapper.ReportSqlMapper">
-
+    <resultMap type="ReportSql" id="ReportSqlResult">
+        <result property="id" column="id"/>
+        <result property="sqlName" column="sql_name"/>
+        <result property="databaseId" column="database_id"/>
+        <result property="querySql" column="query_sql"/>
+        <result property="layout" column="layout"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
 </mapper>

@@ -54,6 +54,7 @@
     "vue-codemirror": "^4.0.6",
     "vue-count-to": "1.0.13",
     "vue-cropper": "0.5.5",
+    "vue-grid-layout": "^2.3.12",
     "vue-meta": "^2.4.0",
     "vue-router": "3.4.9",
     "vuedraggable": "2.24.3",

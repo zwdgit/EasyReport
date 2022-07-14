@@ -1,18 +1,24 @@
 package com.sdyx.report.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
-@TableName("report_sql")
+@TableName(value = "report_sql", autoResultMap = true)
+@Builder
 public class ReportSql implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +44,8 @@ public class ReportSql implements Serializable {
      */
     private String querySql;
 
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private List<Layout> layout;
     /**
      * 创建时间
      */
@@ -63,4 +71,5 @@ public class ReportSql implements Serializable {
      */
     @TableField(fill = FieldFill.UPDATE)
     private String updateBy;
+
 }
