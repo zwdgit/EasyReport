@@ -109,7 +109,7 @@
           >
             <template slot-scope="scope">
           <span v-if="dicts[item.sqlField]">
-              {{ formatDictLabel(dicts[item.sqlField], scope.row[item.sqlField]) }}
+              {{ formatDictLabel(dicts[item.sqlField], (scope.row[item.sqlField])) }}
           </span>
               <span v-else>
               {{ scope.row[item.sqlField] }}
@@ -193,6 +193,7 @@ export default {
       }
       this.loading = true
       reportList(this.reportId, this.queryParams).then(ret => {
+        console.info(ret.rows)
         this.reportList = ret.rows
         this.total = ret.total
       }).finally(() => this.loading = false)
